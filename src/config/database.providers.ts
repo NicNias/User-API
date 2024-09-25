@@ -4,7 +4,7 @@ import { DataSource } from "typeorm";
 config();
 export const databaseProviders = new DataSource({
   type: "mysql",
-  host: process.env.HOST,
+  host: "localhost",
   port: Number(process.env.PORT),
   username: process.env.USER,
   password: process.env.PASSWORD,
@@ -17,6 +17,6 @@ databaseProviders
   .then(() => {
     console.log("O Banco está vivo!");
   })
-  .catch(() => {
-    console.log("O Banco está morto!");
+  .catch((error) => {
+    console.log("O Banco está morto!", error);
   });
