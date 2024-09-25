@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { z } from "zod";
 
 import { User } from "../entities/user.entity";
-import { userRepository } from "../repositorys/user.repository";
+import { userService } from "../services/user.service";
 
 import { encryptPassword } from "../helpers/encryptPass";
 
@@ -17,7 +17,7 @@ export async function userControllers(app: FastifyInstance) {
 
       const { nome, email, senha } = bodySchema.parse(request.body);
 
-      const userCheck = await userRepository.findByEmail(email);
+      const userCheck = await userService.findByEmail(email);
       if (userCheck) {
         return reply
           .status(400)
@@ -26,7 +26,7 @@ export async function userControllers(app: FastifyInstance) {
 
       const hashedPass = await encryptPassword(senha);
 
-      const newUser = await userRepository.save(
+      const newUser = await userService.save(
         Object.assign(new User(), { nome, email, senha: hashedPass })
       );
 
