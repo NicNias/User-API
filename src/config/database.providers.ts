@@ -9,7 +9,7 @@ export const databaseProviders = new DataSource({
   username: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  entities: [__dirname + "../*.entity{.ts,.js}"],
+  entities: [__dirname + "/../entities/*.entity{.ts,.js}"],
 });
 
 databaseProviders

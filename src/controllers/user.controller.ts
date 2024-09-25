@@ -38,4 +38,15 @@ export async function userControllers(app: FastifyInstance) {
       return reply.status(500).send({ message: "Erro no Servidor!", error });
     }
   });
+
+  app.get("/user", async (request, reply) => {
+    try {
+      const users = await userService.findByAll();
+
+      return reply.status(200).send({ users });
+    } catch (error) {
+      console.log("Erro no servidor!", error);
+      return reply.status(500).send({ message: "Erro no Servidor!", error });
+    }
+  });
 }

@@ -4,6 +4,10 @@ import { databaseProviders } from "../config/database.providers";
 export class UserService {
   private userService = databaseProviders.getRepository(User);
 
+  async findByAll(): Promise<User[]> {
+    return await this.userService.find();
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     return await this.userService.findOne({ where: { email } });
   }
